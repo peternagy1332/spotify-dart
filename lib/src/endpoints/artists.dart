@@ -17,7 +17,9 @@ class Artists extends EndpointPaging {
   }
 
   Future<Iterable<Track>> getTopTracks(
-      String artistId, String? countryCode) async {
+    String artistId, {
+    String? countryCode,
+  }) async {
     var path = '$_path/$artistId/top-tracks';
 
     if (countryCode != null) {
