@@ -17,9 +17,14 @@ class Artists extends EndpointPaging {
   }
 
   Future<Iterable<Track>> getTopTracks(
-      String artistId, String countryCode) async {
-    var jsonString =
-        await _api._get('$_path/$artistId/top-tracks?country=$countryCode');
+      String artistId, String? countryCode) async {
+    var path = '$_path/$artistId/top-tracks';
+
+    if (countryCode != null) {
+      path += '?country=$countryCode';
+    }
+
+    var jsonString = await _api._get(path);
     var map = json.decode(jsonString);
 
     var topTracks = map['tracks'] as Iterable<dynamic>;
